@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="notes">
+        <item>Go to the doctor</item>
+        <item>To wash a car</item>
+        <item>Go to the gim</item>
+        <item>Pick up a child from kindergarten</item>
+
+    </string-array>
+
+    <string-array name="descriptionNotes">
+        <item>Tuesday, 17.00 </item>
+        <item>Wednesday, 19.00</item>
+        <item>Thursday, 18.00</item>
+        <item>Every day 16.00</item>
+
+    </string-array>
+
+
+</resources>

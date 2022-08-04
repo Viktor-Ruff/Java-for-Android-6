@@ -4,12 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
-        android:layout_width="wrap_content"
+        android:background="@drawable/colors_horizontal"
+        android:layout_width="0px"
         android:layout_height="match_parent"
-        android:background="@drawable/colors" />
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:background="@drawable/colors_horizontal_revert"
+        android:id="@+id/noteDescriptionContainer"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
 </LinearLayout>

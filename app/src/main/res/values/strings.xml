@@ -2,4 +2,5 @@
     <string name="app_name">Java for Android 6</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="note_description">note description</string>
 </resources>
