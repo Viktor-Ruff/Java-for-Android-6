@@ -5,6 +5,7 @@ import static com.example.javaforandroid6.R.drawable.rectangle;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,13 +16,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +39,10 @@ import android.widget.TextView;
  */
 public class NotesFragment extends Fragment {
 
-    private static final String CURRENT_NOTE = "CurrentCity";
+    private Note note = null;
+
+    private static final String CURRENT_NOTE = "CurrentNote";
+    private int notesCount = 1;
     private int currentPosition = 0;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -42,9 +54,9 @@ public class NotesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public NotesFragment() {
+    /*public NotesFragment() {
         // Required empty public constructor
-    }
+    }*/
 
     /**
      * Use this factory method to create a new instance of
@@ -85,24 +97,68 @@ public class NotesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (savedInstanceState != null) {
-            currentPosition = savedInstanceState.getInt(CURRENT_NOTE, 0);
+            /*currentPosition = savedInstanceState.getInt(CURRENT_NOTE, 0);*/
+            note = (Note) savedInstanceState.getSerializable(CURRENT_NOTE);
         }
 
         initList(view);
 
         if (isLandscape()) {
-            showLandNoteDescription(currentPosition);
+            showLandNoteDescription(note);
         }
     }
 
 
     @SuppressLint({"ResourceAsColor", "SetTextI18n", "ResourceType"})
     private void initList(View view) {
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+
         LinearLayout layoutView = (LinearLayout) view;
-        String[] notes = getResources().getStringArray(R.array.notes);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(AbsListView.LayoutParams.WRAP_CONTENT, AbsListView.LayoutParams.FILL_PARENT);
         params.height = 6;
         params.width = 1200;
+
+        //NoteStorage notesArray = new NoteStorage();
+        Button btNewNote = view.findViewById(R.id.btNewNote);
+
+        btNewNote.setOnClickListener(v -> {
+            String noteName = "Note " + notesCount;
+            note = new Note(noteName, formatter, notesCount);
+            //notesArray.addNote(newNote);
+            TextView tvNote = new TextView(getContext());
+            tvNote.setText(notesCount + ". " + note.getNoteName());
+            notesCount++;
+            tvNote.setTextSize(30);
+            tvNote.setTypeface(null, Typeface.BOLD_ITALIC);
+            layoutView.addView(tvNote);
+            View line2 = new View(getContext());
+            line2.setBackgroundColor(Color.BLACK);
+            line2.setLayoutParams(params);
+            layoutView.addView(line2);
+
+            tvNote.setOnClickListener(v1 -> {
+                showNoteDescription(note);
+            });
+
+
+
+            /*Button btCreateNewNote = new Button(getContext());
+            btCreateNewNote.setHint(R.string.enter_note_title);
+            btCreateNewNote.setTextSize(25);
+            btCreateNewNote.setInputType(InputType.TYPE_TEXT_VARIATION_NORMAL);
+            btCreateNewNote.setTypeface(null, Typeface.BOLD_ITALIC);
+            layoutView.addView(btCreateNewNote);
+
+            View line2 = new View(getContext());
+            line2.setBackgroundColor(Color.BLACK);
+            line2.setLayoutParams(params);
+            layoutView.addView(line2);
+            notesCount++;*/
+        });
+
+/*        //String[] notes = getResources().getStringArray(R.array.notes);
 
         for (int i = 0; i < notes.length; i++) {
             TextView tvNote = new TextView(getContext());
@@ -125,23 +181,23 @@ public class NotesFragment extends Fragment {
             line2.setLayoutParams(params);
             layoutView.addView(line2);
 
-        }
+        }*/
     }
 
-    private void showNoteDescription(int index) {
+    private void showNoteDescription(Note note) {
 
         if (isLandscape()) {
-            showLandNoteDescription(index);
+            showLandNoteDescription(note);
         } else {
-            showPortNoteDescription(index);
+            showPortNoteDescription(note);
         }
 
 
     }
 
-    private void showPortNoteDescription(int index) {
+    private void showPortNoteDescription(Note note) {
 
-        NoteDescriptionFragment noteDescriptionFragment = NoteDescriptionFragment.newInstance(index);
+        NoteDescriptionFragment noteDescriptionFragment = NoteDescriptionFragment.newInstance(note);
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragmentContainer, noteDescriptionFragment);
@@ -151,9 +207,9 @@ public class NotesFragment extends Fragment {
 
     }
 
-    private void showLandNoteDescription(int index) {
+    private void showLandNoteDescription(Note note) {
 
-        NoteDescriptionFragment landNoteDescriptionFragment = NoteDescriptionFragment.newInstance(index);
+        NoteDescriptionFragment landNoteDescriptionFragment = NoteDescriptionFragment.newInstance(note);
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.noteDescriptionContainer, landNoteDescriptionFragment);
@@ -167,7 +223,7 @@ public class NotesFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt(CURRENT_NOTE, currentPosition);
+        outState.putSerializable(CURRENT_NOTE, note);
         super.onSaveInstanceState(outState);
 
     }

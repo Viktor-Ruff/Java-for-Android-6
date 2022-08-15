@@ -5,21 +5,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NoteDescriptionFragment#newInstance} factory method to
+ * Use the {@link HomeScreenFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NoteDescriptionFragment extends Fragment {
-
-    static final String ARG_INDEX = "index";
+public class HomeScreenFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +29,7 @@ public class NoteDescriptionFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public NoteDescriptionFragment() {
+    public HomeScreenFragment() {
 
 
         // Required empty public constructor
@@ -42,11 +41,11 @@ public class NoteDescriptionFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NoteDescriptionFragment.
+     * @return A new instance of fragment HomeScreen.
      */
     // TODO: Rename and change types and number of parameters
-    public static NoteDescriptionFragment newInstance(String param1, String param2) {
-        NoteDescriptionFragment fragment = new NoteDescriptionFragment();
+    public static HomeScreenFragment newInstance(String param1, String param2) {
+        HomeScreenFragment fragment = new HomeScreenFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,38 +60,31 @@ public class NoteDescriptionFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        if (savedInstanceState != null) {
-            requireActivity().getSupportFragmentManager().popBackStack();
-        }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_note_description, container, false);
+
+        return inflater.inflate(R.layout.fragment_home_screen, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Bundle arguments = getArguments();
 
-        if (arguments != null) {
-            Note note = (Note) arguments.getSerializable(ARG_INDEX);
-            TextView tvNoteName = view.findViewById(R.id.edNoteName);
-            tvNoteName.setText(note.getNoteName());
+        Button btNotes = getView().findViewById(R.id.btNotes);
+        btNotes.setOnClickListener(v -> {
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainer, new NotesFragment());
+            fragmentTransaction.addToBackStack("");
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.commit();
 
-        }
+
+        });
     }
 
-    public static NoteDescriptionFragment newInstance(Note note) {
-        NoteDescriptionFragment fragment = new NoteDescriptionFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_INDEX, note);
-        fragment.setArguments(args);
-        return fragment;
-    }
 }

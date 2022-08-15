@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="CalcButton">
+
+        <!--<item name="fontFamily">@font/cartoon_blocks</item>-->
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="cornerRadius">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:background">@drawable/rectangle</item>
+
+
+        <!--<item name="rippleColor">@color/purple_200</item>-->
+
+    </style>
+
+    <style name="CalcButton.ActionCalcButton">
+        <item name="android:backgroundTint">#AE1D0325</item>
+        <item name="android:textColor">#01AFFF</item>
+
+    </style>
+
+
+</resources>
