@@ -1,61 +1,129 @@
 package com.example.javaforandroid6;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Random;
 
 /**
  * Created by Viktor-Ruff
  * Date: 14.08.2022
  * Time: 21:42
  */
-public class Note implements Serializable {
 
-    private int index;
+
+@RequiresApi(api = Build.VERSION_CODES.O)
+public class Note implements Parcelable {
+
+
+    private static final Random random = new Random();
+    private static Note[] notes;
+    private static int counter;
+
+
+    private int id;
     private String noteName;
     private String noteDescription;
-    private SimpleDateFormat noteInformation;
+    private LocalDateTime creationDate;
 
-    public Note(String noteName, SimpleDateFormat noteInformation, int index) {
-        this.noteName = noteName;
-        this.index = index;
-        this.noteInformation = noteInformation;
+
+    public int getId() {
+        return id;
     }
-
-
-    public String getNoteName() {
-        return noteName;
-    }
-
 
     public void setNoteName(String noteName) {
         this.noteName = noteName;
     }
 
+    public void setNoteDescription(String noteDescription) {
+        this.noteDescription = noteDescription;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public static Note[] getNotes() {
+        return notes;
+    }
+
+    public String getNoteName() {
+        return noteName;
+    }
 
     public String getNoteDescription() {
         return noteDescription;
     }
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
 
-    public void setNoteDescription(String noteDescription) {
+    {
+        id = ++counter;
+    }
+
+    static {
+        notes = new Note[10];
+        for (int i = 0; i < notes.length; i++) {
+            notes[i] = Note.getNote(i);
+        }
+    }
+
+    public Note(String noteName, String noteDescription, LocalDateTime creationDate) {
+        this.noteName = noteName;
         this.noteDescription = noteDescription;
+        this.creationDate = creationDate;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @SuppressLint("DefaultLocale")
+    public static Note getNote(int index) {
+        String noteName = String.format("%d. Заметка", (index + 1));
+        String description = String.format("Описание заметки %d", index);
+        LocalDateTime creationDate = LocalDateTime.now().plusDays(-random.nextInt(5));
+        return new Note(noteName, description, creationDate);
     }
 
 
-    public SimpleDateFormat getNoteInformation() {
-        return noteInformation;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    protected Note(Parcel parcel) {
+        id = parcel.readInt();
+        noteName = parcel.readString();
+        noteDescription = parcel.readString();
+        creationDate = (LocalDateTime) parcel.readSerializable();
     }
 
-
-    public void setNoteInformation(SimpleDateFormat noteInformation) {
-        this.noteInformation = noteInformation;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public int getIndex() {
-        return index;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(getId());
+        parcel.writeString(getNoteName());
+        parcel.writeString(getNoteDescription());
+        parcel.writeSerializable(getCreationDate());
     }
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
 }

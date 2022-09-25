@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/actionShare"
+        android:icon="@drawable/share"
+        android:title="@string/share"
+        app:showAsAction="always">
+
+    </item>
+
+    <item
+        android:id="@+id/actionAddPhoto"
+        android:icon="@drawable/add_photo"
+        android:title="@string/add_photo"
+        app:showAsAction="ifRoom">
+
+    </item>
+
+</menu>

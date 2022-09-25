@@ -4,11 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="@drawable/flowers"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
+    android:paddingTop="12dp"
     tools:context=".NoteDescriptionFragment">
+
+
+    <!--<android.widget.Toolbar
+        android:id="@+id/noteToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:title="@string/app_name"
+        tools:ignore="MissingConstraints">
+
+    </android.widget.Toolbar>-->
+
 
     <EditText
         android:id="@+id/edNoteName"
@@ -39,12 +52,22 @@
         android:background="@drawable/rectangle"
         android:contentDescription="@string/note_description"
         android:gravity="left"
-        android:minHeight="100dp"
+        android:minHeight="350dp"
         android:padding="4dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edNoteName" />
+
+    <Button
+        android:id="@+id/btSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edNoteDescription" />
 
     <Button
         android:id="@+id/btSettings"

@@ -9,13 +9,11 @@
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
-        android:background="@drawable/colors_horizontal"
         android:layout_width="0px"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <FrameLayout
-        android:background="@drawable/colors_horizontal_revert"
         android:id="@+id/noteDescriptionContainer"
         android:layout_width="0px"
         android:layout_height="match_parent"

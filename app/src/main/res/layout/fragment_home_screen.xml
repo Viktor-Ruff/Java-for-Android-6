@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_175"
     android:orientation="vertical"
-    android:background="@drawable/minimalizm"
     tools:context=".HomeScreenFragment">
 
 
@@ -23,33 +23,56 @@
         tools:ignore="RtlSymmetry" />
 
     <Button
-
         android:id="@+id/btNotes"
+        style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:gravity="start"
         android:text="@string/notes" />
 
-    <Button
-        android:id="@+id/btTasks"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/rectangle">
+
+        <LinearLayout
+            android:id="@+id/notesFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:text="@string/tasks" />
+        android:paddingStart="5dp"
+        android:paddingTop="10dp"
+        android:text="@string/notebook"
+        android:textColor="#323131"
+        android:textSize="25sp" />
 
-    <Button
-
-        android:id="@+id/btSettings"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:text="@string/settings" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:text="@string/profile" />
+        <EditText
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle"
+            android:minHeight="160dp"
+            android:paddingStart="5dp"
+            android:paddingTop="8dp"
+            android:textSize="18sp" />
+
+    </androidx.core.widget.NestedScrollView>
+
 
 </LinearLayout>

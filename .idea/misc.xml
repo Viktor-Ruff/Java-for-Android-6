@@ -10,10 +10,18 @@
         <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/drawable/rectengle.xml" value="0.3509259259259259" />
         <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/drawable/tv_background.xml" value="0.3509259259259259" />
         <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout-land/activity_main.xml" value="0.33" />
+        <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout-land/notes_container.xml" value="0.39479166666666665" />
         <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout/fragment_home_screen.xml" value="0.35260416666666666" />
         <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout/fragment_note_description.xml" value="0.35260416666666666" />
         <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout/fragment_notes.xml" value="0.35260416666666666" />
+        <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout/fragment_notes_container.xml" value="0.33" />
+        <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout/fragment_settings.xml" value="0.35260416666666666" />
+        <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout/notes_container.xml" value="0.36666666666666664" />
+        <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/layout/notes_container_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/menu/fragment_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/menu/menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Works in programs/JAVA WORKS/JAVA FOR ANDROID/Java for Android 6/app/src/main/res/menu/top_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
