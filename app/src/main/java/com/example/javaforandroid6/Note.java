@@ -41,6 +41,10 @@ public class Note implements Parcelable {
         return noteId;
     }
 
+    public void setNoteId(int noteId) {
+        this.noteId = noteId;
+    }
+
     public void setNoteName(String noteName) {
         this.noteName = noteName;
     }
@@ -70,18 +74,19 @@ public class Note implements Parcelable {
     }
 
     {
-      /*  noteId = ++counter;*/
+        /*  noteId = ++counter;*/
     }
 
     static {
-        notes = new Note[10];
+        notes = new Note[3];
         for (int i = 0; i < notes.length; i++) {
             notes[i] = Note.createNote(i);
+            notes[i].setNoteId(i);
         }
     }
 
-    public Note(String noteName, String noteDescription, LocalDateTime creationDate, int id) {
-        this.noteId = id;
+    public Note(String noteName, String noteDescription, LocalDateTime creationDate/*, int id*/) {
+        /*this.noteId = id;*/
         this.noteName = noteName;
         this.noteDescription = noteDescription;
         this.creationDate = creationDate;
@@ -91,10 +96,10 @@ public class Note implements Parcelable {
     @SuppressLint("DefaultLocale")
     public static Note createNote(int index) {
         String noteName = String.format("%d. Заметка", (index + 1));
-        String description = String.format("Описание заметки %d", index);
+        String description = String.format("Описание заметки %d", (index + 1));
         LocalDateTime creationDate = LocalDateTime.now().plusDays(-random.nextInt(5));
-        int noteId = index;
-        return new Note(noteName, description, creationDate, noteId);
+        /*  int noteId = index;*/
+        return new Note(noteName, description, creationDate/*, noteId*/);
     }
 
 
@@ -136,6 +141,20 @@ public class Note implements Parcelable {
 
         List<Note> list = new ArrayList<>(Arrays.asList(notes));
         list.remove(id);
+
+        notes = list.toArray(new Note[list.size()]);
+
+        for (int i = 0; i < notes.length; i++) {
+            notes[i].setNoteId(i);
+        }
+    }
+
+    public void addNote() {
+
+        List<Note> list = new ArrayList<>(Arrays.asList(notes));
+        Note newNote = createNote(list.size());
+        newNote.setNoteId(list.size() - 1);
+        list.add(newNote);
 
         notes = list.toArray(new Note[list.size()]);
     }

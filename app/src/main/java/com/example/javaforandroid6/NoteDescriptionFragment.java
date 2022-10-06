@@ -200,6 +200,7 @@ public class NoteDescriptionFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             note.remove(note.getNoteId());
+                            System.out.println(note.getNoteId());
                             updateData();
                             requireActivity().getSupportFragmentManager().popBackStack();
                             Toast.makeText(getContext(), "Note deleted", Toast.LENGTH_LONG).show();
