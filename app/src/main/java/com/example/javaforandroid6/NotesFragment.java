@@ -1,31 +1,23 @@
 package com.example.javaforandroid6;
 
-import android.content.res.Configuration;
+import static com.example.javaforandroid6.NoteDescriptionFragment.SELECTED_NOTE;
 
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.LinearLayout;
-
-import static com.example.javaforandroid6.NoteDescriptionFragment.SELECTED_NOTE;
-
-import android.widget.TextView;
-
-
-import java.util.Random;
 
 
 public class NotesFragment extends Fragment {
@@ -68,6 +60,14 @@ public class NotesFragment extends Fragment {
         if (isLandscape()) {
             //showLandNoteDetails(note);
         }
+
+        Button btNewNote = view.findViewById(R.id.btNewNote);
+        btNewNote.setOnClickListener(v -> {
+            note.addNote();
+            initNotes();
+        });
+
+
     }
 
     private boolean isLandscape() {
@@ -84,8 +84,8 @@ public class NotesFragment extends Fragment {
     private void initNotes(View view) {
         LinearLayout layoutView = (LinearLayout) view;
         layoutView.removeAllViews();
-        for (int i = 0; i < Note.getNotes().length; i++) {
 
+        for (int i = 0; i < Note.getNotes().length; i++) {
             TextView tv = new TextView(getContext());
             tv.setText(Note.getNotes()[i].getNoteName());
             tv.setTextSize(24);
@@ -96,7 +96,11 @@ public class NotesFragment extends Fragment {
                 showNoteDetails(Note.getNotes()[index]);
             });
         }
+
+
     }
+
+
 
     private void showNoteDetails(Note note) {
         this.note = note;
@@ -120,6 +124,9 @@ public class NotesFragment extends Fragment {
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
     }
+
+
+
 
 /*    private void showLandNoteDetails(Note note) {
         NoteDescriptionFragment noteDescriptionFragment = NoteDescriptionFragment.newInstance(note);
