@@ -2,12 +2,14 @@ package com.example.javaforandroid6;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -25,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import java.util.ArrayList;
@@ -77,7 +80,7 @@ public class NoteDescriptionFragment extends Fragment {
             //int index = arguments.getInt(SELECTED_NOTE);
             Note paramNote = (Note) arguments.getParcelable(SELECTED_NOTE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                note = Arrays.stream(Note.getNotes()).filter(n -> n.getId() == paramNote.getId()).findFirst().get();
+                note = Arrays.stream(Note.getNotes()).filter(n -> n.getNoteId() == paramNote.getNoteId()).findFirst().get();
             }
 
 
@@ -173,17 +176,37 @@ public class NoteDescriptionFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (item.getItemId() == R.id.actionAddPhoto){
+        if (item.getItemId() == R.id.actionAddPhoto) {
 
             return true;
         }
 
-        if (item.getItemId() == R.id.actionShare){
+        if (item.getItemId() == R.id.actionShare) {
 
             return true;
+        }
+
+
+        if (item.getItemId() == R.id.actionDelete) {
+
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Attention")
+                    .setMessage("Are you sure?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            note.remove(note.getNoteId());
+                            updateData();
+                            requireActivity().getSupportFragmentManager().popBackStack();
+                            Toast.makeText(getContext(), "Note deleted", Toast.LENGTH_LONG).show();
+                        }
+                    })
+
+                    .setNegativeButton("No", null).show();
         }
 
         return super.onOptionsItemSelected(item);

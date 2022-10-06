@@ -25,5 +25,6 @@
     <string name="exit">exit</string>
     <string name="share">Share</string>
     <string name="add_photo">Add photo</string>
+    <string name="delete">Delete</string>
 
 </resources>

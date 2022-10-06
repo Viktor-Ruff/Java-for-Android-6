@@ -10,6 +10,9 @@ import androidx.annotation.RequiresApi;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -25,17 +28,17 @@ public class Note implements Parcelable {
 
     private static final Random random = new Random();
     private static Note[] notes;
-    private static int counter;
+    /*private static int counter;*/
 
 
-    private int id;
+    private int noteId;
     private String noteName;
     private String noteDescription;
     private LocalDateTime creationDate;
 
 
-    public int getId() {
-        return id;
+    public int getNoteId() {
+        return noteId;
     }
 
     public void setNoteName(String noteName) {
@@ -67,17 +70,18 @@ public class Note implements Parcelable {
     }
 
     {
-        id = ++counter;
+      /*  noteId = ++counter;*/
     }
 
     static {
         notes = new Note[10];
         for (int i = 0; i < notes.length; i++) {
-            notes[i] = Note.getNote(i);
+            notes[i] = Note.createNote(i);
         }
     }
 
-    public Note(String noteName, String noteDescription, LocalDateTime creationDate) {
+    public Note(String noteName, String noteDescription, LocalDateTime creationDate, int id) {
+        this.noteId = id;
         this.noteName = noteName;
         this.noteDescription = noteDescription;
         this.creationDate = creationDate;
@@ -85,17 +89,18 @@ public class Note implements Parcelable {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("DefaultLocale")
-    public static Note getNote(int index) {
+    public static Note createNote(int index) {
         String noteName = String.format("%d. Заметка", (index + 1));
         String description = String.format("Описание заметки %d", index);
         LocalDateTime creationDate = LocalDateTime.now().plusDays(-random.nextInt(5));
-        return new Note(noteName, description, creationDate);
+        int noteId = index;
+        return new Note(noteName, description, creationDate, noteId);
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     protected Note(Parcel parcel) {
-        id = parcel.readInt();
+        noteId = parcel.readInt();
         noteName = parcel.readString();
         noteDescription = parcel.readString();
         creationDate = (LocalDateTime) parcel.readSerializable();
@@ -109,7 +114,7 @@ public class Note implements Parcelable {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(getId());
+        parcel.writeInt(getNoteId());
         parcel.writeString(getNoteName());
         parcel.writeString(getNoteDescription());
         parcel.writeSerializable(getCreationDate());
@@ -126,4 +131,13 @@ public class Note implements Parcelable {
             return new Note[size];
         }
     };
+
+    public void remove(int id) {
+
+        List<Note> list = new ArrayList<>(Arrays.asList(notes));
+        list.remove(id);
+
+        notes = list.toArray(new Note[list.size()]);
+    }
+
 }
