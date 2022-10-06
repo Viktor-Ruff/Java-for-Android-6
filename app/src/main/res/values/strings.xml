@@ -1,6 +1,30 @@
 <resources>
-    <string name="app_name">Java for Android 6</string>
+    <string name="app_name">TO DO LIST</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="note_description">note description</string>
+    <string name="note_description">Note description</string>
+    <string name="new_note">New note</string>
+    <string name="tasks">Tasks</string>
+    <string name="settings">Settings</string>
+    <string name="enter_note_title">Enter note title</string>
+    <string name="notes">Notes</string>
+    <string name="profile">Profile</string>
+    <string name="hello">Hello</string>
+    <string name="save">Save</string>
+    <string name="notebook">Notebook</string>
+    <string name="plus">+</string>
+    <string name="home_screen">Home screen</string>
+    <string name="wastebasket">Wastebasket</string>
+    <string name="font">Font</string>
+    <string name="lutsk">lutsk</string>
+    <string name="ussr">ussr</string>
+    <string name="philosopher">philosopher</string>
+    <string name="theme">Theme</string>
+    <string name="dark">Dark</string>
+    <string name="white">White</string>
+    <string name="exit">exit</string>
+    <string name="share">Share</string>
+    <string name="add_photo">Add photo</string>
+    <string name="delete">Delete</string>
+
 </resources>
